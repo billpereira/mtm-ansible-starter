@@ -1,0 +1,30 @@
+---
+  - hosts: mtm
+    gather_facts: no
+    environment:
+      ZOAU_ROOT: "{{zoau_home}}"    
+      ZOAU_HOME: "{{zoau_home}}" 
+      PATH: "{{zoau_home}}/bin:{{python_path}}/bin:/bin:."
+      LIBPATH: "{{zoau_home}}/lib:{{python_path}}/lib:/lib:/usr/lib:."
+      PYTHONPATH: "{{zoau_home}}/lib"
+      _BPXK_AUTOCVT: "ON"
+        
+    collections:
+      - ibm.ibm_zos_core
+    
+    tasks:
+      - name: Submit a IEFBR14
+        zos_job_submit:
+          src: "{{ansible_user}}.JCL(IEFBR14)"
+          location: DATA_SET
+          wait: true
+          return_output: true
+        register: job_detail
+
+      - name: Setting fact `Job Results`
+        set_fact:
+          job_results: "{{ job_detail.jobs[0]}}"
+
+      - name: Results
+        debug:  
+          msg: "Job {{ job_results.job_id}} completed with {{ job_results.ret_code.msg}}"
