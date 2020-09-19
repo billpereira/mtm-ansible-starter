@@ -12,3 +12,10 @@ _TAG_REDIR_IN: txt
 _TAG_REDIR_OUT: txt
 tgt_tmp_dir: "/tmp"
 ctl_tmp_dir: "/tmp"
+default_environment:
+  ZOAU_ROOT: "{{zoau_home}}"    
+  ZOAU_HOME: "{{zoau_home}}" 
+  PATH: "{{zoau_home}}/bin:{{python_path}}/bin:/bin:."
+  LIBPATH: "{{zoau_home}}/lib:{{python_path}}/lib:/lib:/usr/lib:."
+  PYTHONPATH: "{{zoau_home}}/lib"
+  _BPXK_AUTOCVT: "ON"

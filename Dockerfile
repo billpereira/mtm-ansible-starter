@@ -6,7 +6,7 @@ RUN  pip3 install ansible
 RUN yum install -y openssh*;
 RUN yum install -y initscripts;
 # RUN ansible-galaxy collection install ibm.ibm_zos_core:==1.1.0-beta1
-RUN ansible-galaxy collection install ibm.ibm_zos_core
+RUN ansible-galaxy collection install ibm.ibm_zos_core:==1.2.1
 WORKDIR /root
 COPY ansible.cfg .
 COPY ping.yml .
